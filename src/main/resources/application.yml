@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: pre-update-password-action
+
+# Credentials IS must present. Override with environment variables in real
+# deployments: ACTION_AUTH_USERNAME / ACTION_AUTH_PASSWORD
+action:
+  auth:
+    username: ${ACTION_AUTH_USERNAME:admin}
+    password: ${ACTION_AUTH_PASSWORD:admin}
+
+password-policy:
+  forbidden-tokens: wso2,password
+  min-length: 8
+  # true  -> answer ERROR when the password arrives hashed (blocks the update)
+  # false -> answer SUCCESS and log a warning
+  fail-closed-on-hash: true
+
+logging:
+  level:
+    com.example.iam.passwordaction: DEBUG
